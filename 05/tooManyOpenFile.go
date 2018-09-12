@@ -1,23 +1,21 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"net"
-	"net/http"
+	"io/ioutil"
+	"strconv"
 	"time"
 )
 
 func main() {
-	for {
-		conn, err := net.Dial("tcp", "ascii.jp:80")
+	for i := 1; i < 1000; i++ {
+		path := "many_files/test_" + strconv.Itoa(i) + ".txt"
+		data, err := ioutil.ReadFile(path)
 		if err != nil {
 			panic(err)
 		}
-		conn.Write([]byte("GET / HTTP/1.0\r\nHost: ascii.jp\r\n\r\n"))
-		res, err := http.ReadResponse(bufio.NewReader(conn), nil)
-		fmt.Println(res.Header)
-
-		time.Sleep(3 * time.Second)
+		fmt.Println(data)
 	}
+
+	time.Sleep(30 * time.Second)
 }
