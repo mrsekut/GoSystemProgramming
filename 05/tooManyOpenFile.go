@@ -1,23 +1,16 @@
+package main
+
 import (
 	"fmt"
 	"io/ioutil"
 )
 
-func ReadFromFile(filepath string) string {
-	defer func() {
-		if err1 := recover(); err1 != nil {
-			fmt.Println("!!!!!!!!!!!!!!!!Panic Occured and Recovered in readFromFile(), Error Info: ", err1)
+func main() {
+	for {
+		data, err := ioutil.ReadFile("test.txt")
+		if err != nil {
+			panic(err)
 		}
-	}()
-
-	strData := ""
-
-	data, err := ioutil.ReadFile(filepath)
-	if err != nil {
-		fmt.Println("File read error: ", err)
-		return ""
+		fmt.Println(string(data))
 	}
-
-	strData = string(data)
-	return strData
 }
