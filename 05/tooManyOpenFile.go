@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
+	"os"
 	"strconv"
 	"time"
 )
@@ -10,11 +9,11 @@ import (
 func main() {
 	for i := 1; i < 1000; i++ {
 		path := "many_files/test_" + strconv.Itoa(i) + ".txt"
-		data, err := ioutil.ReadFile(path)
+		file, err := os.Create(path)
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(data)
+		file.Write([]byte("os.File example\n"))
 	}
 
 	time.Sleep(30 * time.Second)
