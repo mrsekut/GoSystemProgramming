@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8888")
+	conn, err := net.Dial("tcp", "localhost:18888")
 	if err != nil {
 		panic(err)
 	}
 	request, err := http.NewRequest(
-		"GET", "http://localhost:8888", nil)
+		"GET", "http://localhost:18888", nil)
 	if err != nil {
 		panic(err)
 	}

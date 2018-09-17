@@ -1,3 +1,4 @@
+// TCPソケットを使ったHTTPサーバー
 package main
 
 import (
@@ -11,11 +12,11 @@ import (
 )
 
 func main() {
-	listener, err := net.Listen("tcp", "localhost:8888")
+	listener, err := net.Listen("tcp", "localhost:18888")
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Server is running at localhost:8888")
+	fmt.Println("Server is running at localhost:18888")
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
