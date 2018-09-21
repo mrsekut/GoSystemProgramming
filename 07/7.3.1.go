@@ -17,6 +17,7 @@ func main() {
 	defer conn.Close()
 	start := time.Now()
 	wait := start.Truncate(interval).Add(interval).Sub(start)
+	time.Sleep(wait)
 	ticker := time.Tick(interval)
 	for now := range ticker {
 		conn.Write([]byte(now.String()))
