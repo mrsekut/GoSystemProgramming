@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	for i := 1; i < 1000; i++ {
+	for i := 1; i < 5000; i++ {
 		path := "many_files/test_" + strconv.Itoa(i) + ".txt"
 		file, err := os.Create(path)
 		if err != nil {
