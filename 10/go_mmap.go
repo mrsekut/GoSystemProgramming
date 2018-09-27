@@ -24,7 +24,7 @@ func main() {
 	defer f.Close()
 
 	// 指定したファイルの内容をメモリ上に展開
-	m, err := mmap.Map(f, mmap.RDWR, 0) // mmap.COPYにしてみる
+	m, err := mmap.Map(f, mmap.COPY, 0) // mmap.COPYにしてみる
 	if err != nil {
 		panic(err)
 	}

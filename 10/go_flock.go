@@ -25,12 +25,14 @@ func NewFileLock(filename string) *FileLock {
 
 func (m *FileLock) Lock() {
 	m.l.Lock()
-	if err := syscall.Flock(m.fd, syscall.LOCK_EX); err != nil {
+	// LOCK_EX: 排他ロック
+	if err := syscall.Flock(m.fd, syscall.LOCK_SH); err != nil {
 		panic(err)
 	}
 }
 
 func (m *FileLock) Unlock() {
+	// LOCK_UN: ロック解除
 	if err := syscall.Flock(m.fd, syscall.LOCK_UN); err != nil {
 		panic(err)
 	}
@@ -45,3 +47,6 @@ func main() {
 	l.Unlock()
 	fmt.Println("unlock")
 }
+
+// LOCK_SH: 共有ロック
+// LOCK_NB: ノンブロッキングモード
