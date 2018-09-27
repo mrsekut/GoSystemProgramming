@@ -16,11 +16,12 @@ func main() {
 	dirname := os.Args[1]
 
 	counter := 0
-	watcher, err := fsnotify.NewWatcher()
+	watcher, err := fsnotify.NewWatcher() // 監視用のインスタンスの生成
 	if err != nil {
 		panic(err)
 	}
 	defer watcher.Close()
+
 	done := make(chan bool)
 	go func() {
 		for {
