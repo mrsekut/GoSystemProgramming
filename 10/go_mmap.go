@@ -24,20 +24,29 @@ func main() {
 	defer f.Close()
 
 	// 指定したファイルの内容をメモリ上に展開
-	m, err := mmap.Map(f, mmap.COPY, 0) // mmap.COPYにしてみる
+	m, err := mmap.Map(f, mmap.RDWR, 0) // mmap.COPYにしてみる
 	if err != nil {
 		panic(err)
 	}
 	defer m.Unmap()
 
 	m[9] = 'X'
-	// m.Flush() // 書きかけの内容をファイルに保存
+	m.Flush() // 書きかけの内容をファイルに保存
 
 	fileData, err := ioutil.ReadAll(f)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("original:  %s\n", testData)
-	fmt.Printf("mmap: 	   %s\n", m)
-	fmt.Printf("file: 	   %s\n", fileData)
+
+	fmt.Printf("original:  		%s\n", testData)
+	fmt.Printf("mmap: 	   		%s\n", m)
+	fmt.Printf("file: 	  		%s\n", fileData)
+
+	// f.Write([]byte("9876543\n"))
+	// addedFileData, err := ioutil.ReadAll(f)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Printf("added file: 	%s\n", addedFileData)
+
 }
